@@ -77,7 +77,6 @@
     -webkit-font-smoothing:antialiased;
   }
   ::selection{ background:var(--safety-tint); color:var(--ink); }
-
   a{ color:inherit; }
 
   .wrap{
@@ -125,7 +124,7 @@
     color:var(--ink);
   }
   .hero p.lede{
-    max-width:62ch;
+    max-width:66ch;
     font-size:16.5px;
     color:var(--ink-soft);
     margin:0 0 26px;
@@ -142,19 +141,42 @@
     color:var(--ink);
     font-weight:600;
   }
-  .disclaimer{
-    margin-top:28px;
-    padding:12px 16px;
-    border:1px solid var(--rule);
-    border-radius:8px;
-    background:var(--surface);
-    font-size:13px;
-    color:var(--ink-soft);
-    max-width:72ch;
-  }
 
-  /* ---------- Session nav ---------- */
-  nav.sessions{
+  .usage{
+    margin-top:28px;
+    padding:16px 20px;
+    border:1px solid var(--rule);
+    border-radius:10px;
+    background:var(--surface);
+    max-width:78ch;
+    box-shadow:var(--shadow);
+  }
+  .usage .usage-title{
+    font-family:"IBM Plex Sans Condensed",sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--steel-deep);
+    margin:0 0 8px;
+  }
+  .usage ol{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .usage li{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    display:grid;
+    grid-template-columns:22px 1fr;
+    gap:8px;
+  }
+  .usage li b{ color:var(--steel); font-weight:600; }
+
+  /* ---------- PART jump nav ---------- */
+  nav.partnav{
     position:sticky;
     top:0;
     z-index:20;
@@ -162,7 +184,7 @@
     border-bottom:1px solid var(--rule);
     backdrop-filter:blur(6px);
   }
-  .sessions-inner{
+  .partnav-inner{
     max-width:1180px;
     margin:0 auto;
     padding:0 24px;
@@ -170,82 +192,67 @@
     gap:4px;
     overflow-x:auto;
   }
-  .tab-btn{
+  .jump-btn{
     appearance:none;
     border:none;
     background:transparent;
-    font-family:"IBM Plex Sans Condensed",sans-serif;
-    font-weight:600;
-    font-size:15.5px;
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:500;
+    font-size:12.5px;
     color:var(--ink-soft);
-    padding:16px 18px 13px;
+    padding:14px 14px 11px;
     cursor:pointer;
     border-bottom:3px solid transparent;
     white-space:nowrap;
+    text-decoration:none;
+    display:inline-block;
     transition:color .15s ease, border-color .15s ease;
   }
-  .tab-btn .count{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:11.5px;
-    font-weight:500;
-    color:var(--ink-soft);
-    margin-left:7px;
-    opacity:.75;
-  }
-  .tab-btn:hover{ color:var(--ink); }
-  .tab-btn[aria-selected="true"]{
+  .jump-btn:hover{ color:var(--ink); }
+  .jump-btn.is-active{
     color:var(--steel-deep);
     border-bottom-color:var(--safety);
   }
-  .tab-btn:focus-visible{ outline:2px solid var(--steel); outline-offset:-2px; }
+  .jump-btn:focus-visible{ outline:2px solid var(--steel); outline-offset:-2px; }
 
-  /* ---------- Chapter jump chips ---------- */
-  .chapter-jump{
+  /* ---------- Part section ---------- */
+  .part{
+    margin-top:52px;
+    scroll-margin-top:56px;
+  }
+  .part-head{
     display:flex;
+    align-items:baseline;
+    gap:14px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:12px;
+    margin-bottom:18px;
     flex-wrap:wrap;
-    gap:8px;
-    margin:28px 0 8px;
   }
-  .chapter-jump a{
-    text-decoration:none;
+  .part-num{
     font-family:"IBM Plex Mono",monospace;
-    font-size:12.5px;
-    color:var(--steel-deep);
-    background:var(--steel-tint);
-    border:1px solid var(--rule);
-    padding:6px 12px;
-    border-radius:999px;
+    font-size:13px;
+    color:var(--safety);
+    font-weight:600;
+    letter-spacing:.05em;
   }
-  .chapter-jump a:hover{ border-color:var(--steel); }
-
-  /* ---------- Session panel ---------- */
-  .panel{ display:none; padding-top:8px; }
-  .panel.is-active{ display:block; }
-
-  .session-intro{
-    margin:32px 0 6px;
-    padding:18px 20px;
-    border-left:3px solid var(--steel);
-    background:var(--surface);
-    border-radius:0 8px 8px 0;
-    box-shadow:var(--shadow);
-  }
-  .session-intro h2{
+  .part-head h2{
     font-family:"IBM Plex Sans Condensed",sans-serif;
-    font-size:21px;
-    margin:0 0 6px;
-    color:var(--ink);
-  }
-  .session-intro p{
+    font-size:26px;
     margin:0;
-    color:var(--ink-soft);
-    font-size:14.5px;
+    color:var(--ink);
+    flex:1;
   }
-  .session-intro .files{
-    margin-top:10px;
+  .part-count{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  .part-files{
     display:flex;
     flex-wrap:wrap;
     gap:6px;
+    margin:-6px 0 20px;
   }
   .file-chip{
     font-family:"IBM Plex Mono",monospace;
@@ -255,45 +262,13 @@
     border-radius:5px;
     padding:3px 8px;
   }
-
-  .chapter{
-    margin-top:46px;
-    scroll-margin-top:70px;
-  }
-  .chapter-head{
-    display:flex;
-    align-items:baseline;
-    gap:12px;
-    border-bottom:1px solid var(--rule);
-    padding-bottom:10px;
-    margin-bottom:20px;
-  }
-  .chapter-num{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:13px;
-    color:var(--safety);
-    font-weight:600;
-    letter-spacing:.02em;
-  }
-  .chapter-head h3{
-    font-family:"IBM Plex Sans Condensed",sans-serif;
-    font-size:24px;
-    margin:0;
-    color:var(--ink);
-    flex:1;
-  }
-  .chapter-tag{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:11.5px;
-    color:var(--ink-soft);
-  }
+  .file-chip::before{ content:"📎 "; }
 
   .card-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(400px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(420px,1fr));
     gap:18px;
   }
-  .card-grid.single{ grid-template-columns:1fr; }
 
   /* ---------- Cards ---------- */
   .card{
@@ -304,7 +279,7 @@
     box-shadow:var(--shadow);
     display:flex;
     flex-direction:column;
-    gap:11px;
+    gap:12px;
   }
   .card-top{
     display:flex;
@@ -325,35 +300,38 @@
     font-size:10.5px;
     font-weight:600;
     letter-spacing:.04em;
-    text-transform:uppercase;
     padding:3px 8px;
     border-radius:5px;
     white-space:nowrap;
   }
-  .kind-prompt{ background:var(--steel-tint); color:var(--steel-deep); }
-  .kind-worksheet{ background:var(--safety-tint); color:var(--safety); }
-  .kind-table{ background:var(--surface-2); color:var(--ink-soft); }
-  .kind-checklist{ background:var(--surface-2); color:var(--ink-soft); }
+  .kind-함께하기{ background:var(--steel-tint); color:var(--steel-deep); }
+  .kind-직접하기{ background:var(--safety-tint); color:var(--safety); }
+  .kind-강사시연{ background:var(--surface-2); color:var(--ink-soft); }
 
-  .chips{ display:flex; flex-wrap:wrap; gap:6px; }
-  .chip{
-    font-family:"IBM Plex Mono",monospace;
-    font-size:11px;
-    color:var(--ink-soft);
-    background:var(--surface-2);
-    padding:3px 8px;
-    border-radius:5px;
-  }
-
-  .scenario{
-    font-size:13.5px;
+  .note-box{
+    font-size:13px;
     color:var(--ink-soft);
     background:var(--paper);
     border:1px dashed var(--rule);
     border-radius:7px;
     padding:9px 11px;
   }
-  .scenario b{ color:var(--ink); font-weight:600; }
+  .note-box.prep{
+    background:var(--safety-tint);
+    border:1px solid var(--safety);
+    color:var(--ink);
+  }
+  .note-box.prep b, .note-box.ref b{ color:var(--steel-deep); font-weight:600; }
+
+  .section-label{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin:0 0 7px;
+  }
 
   .promptbox{
     position:relative;
@@ -391,105 +369,40 @@
   .copy-btn:focus-visible{ outline:2px solid var(--safety); outline-offset:1px; }
   .copy-btn[data-copied="true"]{ background:var(--ok); border-color:var(--ok); color:#fff; }
 
-  .card-note{
-    font-size:12.8px;
-    color:var(--ink-soft);
-    border-top:1px solid var(--rule);
-    padding-top:9px;
-  }
-  .card-note b{ color:var(--ink); }
-
-  .worksheet-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:2px;
-  }
-  .worksheet-head b{
-    font-size:12.8px;
-    color:var(--ink);
-    font-weight:600;
-  }
-  .copy-btn-inline{
-    appearance:none;
-    flex-shrink:0;
-    border:1px solid var(--steel);
-    background:var(--steel-tint);
-    color:var(--steel-deep);
-    font-family:"IBM Plex Mono",monospace;
-    font-size:11px;
-    font-weight:500;
-    padding:5px 10px;
-    border-radius:6px;
-    cursor:pointer;
-    transition:background .15s ease;
-  }
-  .copy-btn-inline:hover{ background:var(--steel); color:var(--surface); }
-  .copy-btn-inline:focus-visible{ outline:2px solid var(--safety); outline-offset:1px; }
-  .copy-btn-inline[data-copied="true"]{ background:var(--ok); border-color:var(--ok); color:#fff; }
-
-  .steps{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-  }
-  .step{
+  .followups{ display:flex; flex-direction:column; gap:9px; }
+  .fstep{
     display:grid;
-    grid-template-columns:26px 1fr;
-    gap:10px;
+    grid-template-columns:24px 1fr;
+    gap:9px;
     align-items:start;
   }
-  .step-num{
-    width:26px; height:26px;
+  .fstep-num{
+    width:24px; height:24px;
     border-radius:50%;
     background:var(--steel-tint);
     color:var(--steel-deep);
     font-family:"IBM Plex Mono",monospace;
-    font-size:12px;
+    font-size:11.5px;
     font-weight:600;
     display:flex; align-items:center; justify-content:center;
+    margin-top:1px;
   }
-  .step-body{ font-size:13.5px; }
-  .step-body .promptbox{ margin-top:6px; }
 
-  table.data{
-    width:100%;
-    border-collapse:collapse;
-    font-size:13px;
+  .extra-grid{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
   }
-  table.data th, table.data td{
-    text-align:left;
-    padding:7px 9px;
-    border-bottom:1px solid var(--rule);
-    font-variant-numeric:tabular-nums;
+  .extra-item{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
   }
-  table.data th{
+  .extra-tag{
     font-family:"IBM Plex Mono",monospace;
-    font-size:11px;
-    letter-spacing:.03em;
-    text-transform:uppercase;
+    font-size:10.5px;
     color:var(--ink-soft);
     font-weight:600;
-  }
-  table.data tr:last-child td{ border-bottom:none; }
-
-  ul.checklist{
-    list-style:none;
-    margin:0; padding:0;
-    display:flex; flex-direction:column; gap:7px;
-    font-size:13.5px;
-  }
-  ul.checklist li{
-    display:flex; gap:9px; align-items:flex-start;
-  }
-  ul.checklist li::before{
-    content:"";
-    flex-shrink:0;
-    width:14px; height:14px;
-    margin-top:2px;
-    border:1.5px solid var(--ink-soft);
-    border-radius:3px;
   }
 
   footer{
@@ -505,7 +418,7 @@
   @media (max-width:640px){
     .card-grid{ grid-template-columns:1fr; }
     header.hero{ padding:40px 20px 28px; }
-    .wrap, .sessions-inner{ padding-left:16px; padding-right:16px; }
+    .wrap, .partnav-inner{ padding-left:16px; padding-right:16px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -515,338 +428,428 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <div class="eyebrow">코비코(주) &nbsp;·&nbsp; ChatGPT 실무 교육</div>
-    <h1>코비코 프롬프트 키트</h1>
-    <p class="lede">1~3회차 교안에 나온 실습 프롬프트를 그대로 복사해 쓸 수 있게 모았습니다. 회차 탭을 고르고, 카드 오른쪽 위 복사 버튼을 누르면 됩니다.</p>
+    <div class="eyebrow">코비코(주) &nbsp;·&nbsp; ChatGPT 실무 활용 과정</div>
+    <h1>실습 프롬프트 워크북</h1>
+    <p class="lede">코비코 ChatGPT 실무 활용 과정 · 5시간 과정에서 사용하는 실습 프롬프트를 그대로 복사해 쓸 수 있게 모았습니다. PART를 고르고, 카드 안의 복사 버튼을 누르면 됩니다.</p>
     <div class="hero-meta">
-      <span><strong>3</strong>개 회차</span>
-      <span><strong id="metaChapters">0</strong>개 챕터</span>
-      <span><strong id="metaPrompts">0</strong>개 프롬프트 · 워크시트</span>
+      <span><strong>8</strong>개 PART</span>
+      <span><strong id="metaItems">0</strong>개 실습 항목</span>
+      <span><strong id="metaPrompts">0</strong>개 프롬프트</span>
     </div>
-    <div class="disclaimer">모든 예제·수치·회사명(대한정밀 등)은 ChatGPT 실습을 위한 100% 가상의 교육용 데이터이며, 실제 코비코(주)의 업무·거래 정보와 무관합니다.</div>
+    <div class="usage">
+      <p class="usage-title">사용 방법</p>
+      <ol>
+        <li><b>①</b> '교안 프롬프트'는 강의 슬라이드와 동일한 문장입니다 — [자료]가 포함된 경우 그 내용까지 통째로 그대로 입력합니다.</li>
+        <li><b>②</b> '이어서 입력'이 있는 경우, 결과를 확인한 뒤 위에서부터 순서대로 하나씩 입력합니다.</li>
+        <li><b>③</b> '추가 실습 프롬프트'는 같은 주제를 다른 상황에 적용해보는 연습입니다 — 시간이 남으면 도전해봅니다.</li>
+        <li><b>④</b> 실습파일 표시가 있는 항목은 해당 파일을 ChatGPT에 먼저 첨부한 뒤 프롬프트를 입력합니다.</li>
+      </ol>
+    </div>
   </div>
 </header>
 
-<nav class="sessions" aria-label="회차 선택">
-  <div class="sessions-inner" id="tabbar" role="tablist"></div>
+<nav class="partnav" aria-label="PART 이동">
+  <div class="partnav-inner" id="partnav"></div>
 </nav>
 
 <main class="wrap">
-  <div id="panels"></div>
+  <div id="parts"></div>
 </main>
 
 <footer>
-  코비코(주) ChatGPT 활용 교육 · 실습자료_대본 1~3번 문서 기준 정리 · 교육용 가상 데이터
+  코비코(주) ChatGPT 실무 활용 과정 · 실습_프롬프트_워크북 기준 정리
 </footer>
 
 <script>
 /* ============================================================
-   DATA
-   kind: prompt | worksheet | table | checklist | steps
+   DATA — parsed from 실습_프롬프트_워크북.docx (document order preserved)
    ============================================================ */
-const DATA = [
+const PARTS = [
 {
-  id: "s1", label: "1회차 · 기초", short: "기초",
-  intro: "안전한 첫 요청부터 검색 출처 확인까지 — ChatGPT 화면구성과 5요소 프롬프트의 기본기.",
-  files: [],
-  chapters: [
+  "num": "01",
+  "title": "첫 실행",
+  "files": [],
+  "items": [
     {
-      id: "s1c1", num: "CHAPTER 1", title: "기본 기능과 안전한 사용",
-      cards: [
-        {
-          kind:"table", title:"실습 1-1 · 화면 모드 구분하기", tag:"워밍업",
-          columns:["업무","적합한 곳"],
-          rows:[
-            ["부품 품질회의 아이디어를 빠르게 정리하고 싶다","Chat"],
-            ["부품 검수 메모를 근거로 보고서 파일을 만들고 싶다","Work"],
-            ["이번 달 발표된 철강 원자재 가격 통계를 확인하고 싶다","Search"],
-          ],
-          prompt:"아래 세 가지 업무를 Chat·Work·Search 중 어디에서 처리하는 것이 적합한지, 이유와 함께 한 줄씩 답해 주세요. ① 부품 품질회의 아이디어 정리 ② 부품 검수 메모 기반 보고서 파일 생성 ③ 이번 달 철강 원자재 가격 공식 통계 확인"
-        },
-        {
-          kind:"prompt", title:"실습 1-2 · 안전한 첫 프롬프트 (5요소)", tag:"핵심",
-          scenario:"[가상 회의 메모]\n- 신규 교육 프로그램 시범 운영 검토\n- 대상 부서는 미정\n- 다음 회의에서 일정 확정 예정\n- 담당자와 예산은 아직 정해지지 않음",
-          prompt:"아래 메모를 3줄로 요약해줘. 결정·담당·기한을 포함하고, 없는 정보는 추정하지 말고 [확인 필요]로 표시해줘.",
-          note:"목표·자료·과업·조건·출력, 다섯 요소가 모두 채워지면 첫 프롬프트로 바로 사용할 수 있습니다."
-        }
-      ]
-    },
-    {
-      id: "s1c2", num: "CHAPTER 2", title: "좋은 프롬프트 만들기와 초안 개선",
-      cards: [
-        {
-          kind:"prompt", title:"참고 · 샘플 프롬프트로 첫 초안 만들기", tag:"예시",
-          scenario:"가상 프로젝트 회의 메모\n1. 대한정밀 서스펜션 샘플 100개 품질검사 통과(결정).\n2. 검사 데이터 일부 누락돼 재검사 필요(이슈).\n3. 이과장이 이번 주 금요일까지 재검사 완료 예정(담당·기한).\n4. 정식 계약 여부는 재검사 후 다음 회의에서 결정.",
-          prompt:"아래 메모만 사용해 팀장용 5줄 요약과 '할 일/담당/기한' 표를 작성해줘. 없는 정보는 [확인 필요]로 표시해줘."
-        },
-        {
-          kind:"prompt", title:"실습 2-1 · 프롬프트 5요소로 만들기", tag:"5요소",
-          scenario:"나쁜 프롬프트(비교용): “검사장비 소모품 신청 메일 좀 써줘.”\n자료: 정밀 캘리퍼스 예비 배터리 10개(소진), 방청 코팅 검사용 시약 3박스(재고 부족), 검사대 보호장갑 5박스(소진)",
-          prompt:"[목표/과업] 아래 검사장비 소모품 목록을 총무팀에 보낼 신청 메일로 정리하세요.\n[맥락] 받는 사람은 총무팀 담당자이며, 이번 주 안에 승인 여부를 결정합니다.\n[자료] 제공된 소모품 목록만 사용합니다.\n[출력] 제목 + 본문(품목·수량·사유 표) + 마무리 인사.\n[조건] 목록에 없는 품목을 추가하지 말고, 예산·기한이 없으면 [확인 필요]로 표시하세요."
-        },
-        {
-          kind:"prompt", title:"실습 2-2 · 확인 질문 먼저 받기 (메타프롬프트)", tag:"메타프롬프트",
-          scenario:"신규 생산팀 신입사원 온보딩 안내 문서를 만드는 상황.",
-          prompt:"신규 생산팀 신입사원 온보딩 안내 문서를 만들어야 합니다. 아직 최종 결과를 작성하지 마세요. 문서를 정확히 만드는 데 필요한 확인 질문을 중요도 순서로 최대 5개만 제시하세요. 개인정보는 묻지 말고, 답을 모르는 항목은 [확인 필요]로 처리할 수 있게 하세요."
-        },
-        {
-          kind:"steps", title:"실습 2-3 · 초안 → 평가 → 수정 → 확정", tag:"멀티턴",
-          steps:[
-            {label:"① 초안", body:"(2-1의 결과를 그대로 사용)"},
-            {label:"② 평가", body:"방금 만든 메일을 정확성·완전성·간결성 기준으로 평가하고, 문제점을 표로 정리해 주세요."},
-            {label:"③ 수정", body:"평가에서 지적된 문제만 고치고, 나머지 문장은 그대로 유지해 주세요."},
-            {label:"④ 확정", body:"원래 소모품 목록과 최종본의 품목·수량이 일치하는지 대조한 뒤, 확정본만 출력해 주세요."},
-          ]
-        },
-        {
-          kind:"prompt", title:"실습 2-4 · 이미지로 표현하기", tag:"이미지",
-          prompt:"다음 주 수요일 협력사 품질점검 방문을 알리는 깔끔한 안내 포스터 이미지를 만들어 주세요. 주제는 \"정기 품질점검\"이고, 밝고 정돈된 공장·사무실 일러스트 스타일로 표현해 주세요. 실제 인물 사진이나 회사 로고는 넣지 말고, 텍스트는 \"정기 품질점검 · 수요일 오전 10시\"만 포함해 주세요."
-        },
-        {
-          kind:"prompt", title:"실습 2-5 · 정확한 텍스트·구조 표현", tag:"이미지",
-          prompt:"다음 내용을 담은 사내 안내 인포그래픽 이미지를 만들어 주세요. 제목은 \"정기 품질점검\"으로 크게 넣고, 아래 3가지 항목을 아이콘과 함께 세로로 배치해 주세요. ① 일시: 수요일 오전 10시 ② 장소: 생산동 2층 품질회의실 ③ 준비물: 최근 검사성적서. 글자는 정확한 맞춤법으로, 깔끔한 사무용 카드뉴스 스타일로 표현해 주세요. 실제 로고나 인물 사진은 넣지 마세요."
-        }
-      ]
-    },
-    {
-      id: "s1c3", num: "CHAPTER 3", title: "웹 검색과 출처 확인",
-      cards: [
-        {
-          kind:"table", title:"실습 3-1 · 검색 프롬프트 6요소", tag:"검색",
-          columns:["요소","내용"],
-          rows:[
-            ["목적","급여 계산 기준 확정"],
-            ["기준일","2026년"],
-            ["대상","한국 최저임금(시급·월 환산)"],
-            ["출처","고용노동부 또는 최저임금위원회 공식 원문"],
-            ["제외","블로그·재인용 자료"],
-            ["출력","핵심 수치 + 링크 + 다시 계산해 확인 메모"],
-          ],
-          prompt:"2026년 기준 한국 최저임금의 시급·월 환산액을 확인해 주세요. 고용노동부 또는 최저임금위원회 공식 원문을 우선하고, 발표일·적용기간·계산 기준을 함께 적으세요. 공식 원문에서 확인되지 않는 값은 [확인 필요]로 표시하고, 마지막에 산술 다시 계산해 확인을 덧붙이세요."
-        },
-        {
-          kind:"prompt", title:"실습 3-2 · 출처 확인 4단계", tag:"검증",
-          scenario:"원문 열기 → 만든 곳 확인 → 내용 비교 → 기록, 4단계를 직접 따라갑니다.",
-          prompt:"방금 확인한 최저임금 정보와 실제 원문 링크의 내용이 일치하는지 비교하고, 다른 부분이 있으면 표로 알려 주세요."
-        },
-        {
-          kind:"prompt", title:"실습 3-3 · Search vs Deep research", tag:"조사계획",
-          scenario:"이번 달 철강 원자재 가격 1개 값 확인 → Search / 3개 부품 협력사 품질인증 변경사항 비교 → Deep research(계획까지만)",
-          prompt:"3개 부품 협력사의 최근 1년 품질인증(ISO 등) 변경사항을 비교하는 조사를 하려 합니다. 아직 보고서를 작성하지 말고, 조사 목적·비교 대상·공식 출처·제외 범위·예상 결과 형태를 계획으로만 제시하세요."
-        },
-        {
-          kind:"prompt", title:"참고 · 심층 리서치 전체 요청", tag:"확장",
-          scenario:"초급실습파일 폴더의 '생성형_AI_보안교육정책_조사_단계별_프롬프트.docx'와 동일한 방식입니다.",
-          prompt:"@심층 리서치\n공개 공식자료를 바탕으로 기업의 전 임직원 대상 '생성형 AI 보안 교육정책' 비교 조사 보고서를 준비해 주세요. 중요: 지금 바로 최종 보고서를 작성하지 말고, 먼저 조사 계획만 제시한 뒤 제 승인을 기다리세요.\n\n[조사 목적] 비기술 직원을 포함한 전 임직원 교육의 핵심 보안 주제 도출 / 여러 공식 지침의 공통점과 차이점 비교 / 코비코와 같은 제조·방산 기업이 사용할 실무 체크리스트 도출\n[비교 대상] 1. NIST AI RMF 및 Generative AI Profile 2. CISA·UK NCSC Guidelines for Secure AI System Development 3. OWASP GenAI Security Project의 최신 LLM Top 10\n[출처 제한] 위 기관의 공식 웹사이트와 공식 발행 문서만 사용 / 블로그·언론·검색요약·판매업체 자료는 근거에서 제외 / 핵심 주장마다 문서명·기관·발행일/버전·직접 링크 표시 / 초안과 최종본을 구분하고 실행일 기준 최신 버전 확인\n[필수 범위] 승인 절차, 입력 금지 정보, 프롬프트 인젝션, 출력 검증, 계정·권한·외부 도구 관리, 사고 보고, 역할별 재교육\n[제외] 법률 준법 판정, 가격·제품 비교, 모델 순위, 비공개 정책 추정\n\n먼저 다음만 포함한 조사 계획을 보여 주세요.\n1. 조사 질문 2. 공식 출처 후보와 선정 이유 3. 최신성·공식성 확인 방법 4. 비교 기준 5. 예상 보고서 목차 6. 제외 내용 7. 예상 한계"
-        }
-      ]
-    },
-    {
-      id: "s1c4", num: "CHAPTER 4", title: "종합 실습과 결과물 완성",
-      cards: [
-        {
-          kind:"steps", title:"실습 4-1 · 사내 휴무 안내문 (종합)", tag:"종합",
-          steps:[
-            {label:"① 준비", body:"다음 달 공휴일에 맞춰 코비코(주) 생산팀 사내 휴무 안내문이 필요합니다. (실제 날짜는 아직 모름 — 확인 필요)"},
-            {label:"② 작성", body:"[목표] 다가오는 공휴일 사내 휴무를 안내하는 공지문을 작성하세요. [맥락] 받는 사람은 생산팀 전체 팀원이며, 하루 전까지 확인해야 합니다. [입력] 공식적으로 확인된 공휴일 날짜만 사용합니다. [출력] 제목 + 3줄 이내 본문(날짜·휴무 여부·업무 복귀일). [제한사항] 날짜가 확인되지 않았다면 지어내지 말고 [확인 필요]로 표시하세요.", isPrompt:true},
-            {label:"③ 검증", body:"다음 달 한국 공휴일 날짜를 확인해 주세요. 정부 공식 발표(대한민국 정책브리핑 또는 공공기관 캘린더) 기준으로, 날짜와 요일, 대체공휴일 여부를 함께 적으세요. 확인되지 않으면 [확인 필요]로 표시하세요.", isPrompt:true},
-            {label:"④ 수정", body:"방금 확인한 공식 날짜를 반영해 ②의 휴무 안내문을 수정하고, 출처 링크와 확인 날짜를 안내문 하단에 함께 표시해 최종본만 출력해 주세요.", isPrompt:true},
-          ],
-          note:"제출 파일명: 코비코_기초_종합실습_이름_날짜"
-        },
-        {
-          kind:"checklist", title:"통과 기준 체크리스트", tag:"평가표",
-          items:[
-            "안전 — 개인정보·기밀·외부 행동 경계가 명시됨",
-            "프롬프트 — 프롬프트 5요소 중 최소 4개가 구체적임",
-            "대화 — 확인 질문 또는 평가 기준이 포함됨",
-            "검색 — 공식 원문·기준일·단위·다시 계산해 확인이 포함됨",
-          ]
-        }
+      "badge": "함께하기",
+      "title": "첫 질문은 짧아도 충분합니다",
+      "prompt": "아래 업무 메모에서 내가 해야 할 일을 정리해줘.\n\n[업무 메모]\n내일 아침 팀장님한테 지난주 생산실적 정리해서 드려야 함. 김과장한테 자재 발주 확인 전화하기. 오후 3시 품질팀 미팅 참석(2층 회의실). 이번주 금요일까지 신규 협력업체 견적서 검토 완료. 인턴 교육자료 초안 만들기—담당자 아직 미정. 다음주 화요일 고객사 방문 일정 확정 필요.",
+      "followups": [
+        "1. 긴급한 업무부터 정렬해줘.",
+        "2. 담당자와 기한이 없는 항목을 따로 표시해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "아래 업무 메모를 부서장에게 보고할 한 문장 요약으로 바꿔줘." },
+        { "label": "추가 실습 2", "text": "같은 메모를 이번엔 동료에게 공유하는 말투로 바꿔줘." }
       ]
     }
   ]
 },
 {
-  id: "s2", label: "2회차 · 중급", short: "중급",
-  intro: "가상 협력사 도입 검토 자료로 근거 있는 Word 보고서와 발표자료, 부품 데이터 정리까지.",
-  files: ["가상_신규협력사_소개자료.pdf","가상_부품단가비교_데이터.csv","코비코_보고서_템플릿.docx","코비코_부품데이터_정리하기_따라하기.xlsx"],
-  chapters: [
+  "num": "02",
+  "title": "대화와 프롬프트 (5요소)",
+  "files": [],
+  "items": [
     {
-      id: "s2c1", num:"CHAPTER 1", title:"근거가 있는 Word 보고서 만들기",
-      cards:[
-        {
-          kind:"prompt", title:"① 문서 작성 프롬프트", tag:"핵심",
-          chips:["가상_신규협력사_소개자료.pdf","가상_부품단가비교_데이터.csv"],
-          note:"PDF는 “약 15% 절감”, CSV 실측 평균은 약 12.1%로 서로 다릅니다 — 두 값이 비교표에 실제로 표시되는지 확인하세요.",
-          prompt:"업로드한 교육용 PDF와 CSV만 근거로 신규 협력사(대한정밀) 도입 검토 보고서 초안을 작성하세요. 1) 결론 3줄  2) 근거 수치 표  3) 리스크와 확인 필요  4) 다음 액션 순서로 구성하세요. 각 수치 옆에 파일명과 근거 위치를 적고, 두 파일의 값이 서로 다르면 임의로 선택하지 말고 비교표로 표시하세요."
-        },
-        {
-          kind:"prompt", title:"② 파일 생성 프롬프트", tag:"핵심",
-          chips:["앞 대화 이어서","코비코_보고서_템플릿.docx"],
-          prompt:"위에서 정리한 근거를 바탕으로 3쪽 이내의 업무 검토 보고서를 DOCX 파일로 만들어 주세요. 구성은 ① 검토 결론 ② 현재 문제와 목표 ③ 대안 비교 ④ 4주 실행계획 ⑤ 평가 기준 ⑥ 위험과 대응 ⑦ 승인 요청 ⑧ 최종 검수 체크리스트 순서로 합니다. 없는 수치나 사실은 만들지 말고 [확인 필요]로 표시하세요. 표·본문의 수치가 같은지 다시 계산해 확인한 뒤 파일 링크를 제공하세요."
-        }
+      "badge": "함께하기",
+      "title": "처음부터 긴 프롬프트를 쓰지 않습니다",
+      "prompt": "아래 회의 메모를 팀장에게 보고할 수 있게 정리해줘.\n\n[회의 메모] 생산1팀 주간회의. 3월 생산목표 98% 달성. 불량률 소폭 상승—원인 파악 필요. 설비 도입은 예산 문제로 다음달 연기. 김대리가 자재 재고 조사 담당. 다음 회의 월요일 10시.",
+      "followups": [
+        "1. 핵심 내용은 3줄로 줄여줘.",
+        "2. 결정된 내용과 아직 결정되지 않은 내용을 구분해줘.",
+        "3. 할 일 · 담당자 · 기한을 표로 만들어줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "아래 회의 메모에서 오늘 안에 처리해야 할 일만 골라줘." },
+        { "label": "추가 실습 2", "text": "같은 회의 메모를 신입사원도 이해할 수 있게 배경 설명을 한 줄 추가해서 정리해줘." }
       ]
     },
     {
-      id: "s2c2", num:"CHAPTER 2", title:"Word 보고서를 PowerPoint로 바꾸기",
-      cards:[
-        {
-          kind:"prompt", title:"③ 슬라이드 변환 프롬프트", tag:"핵심",
-          chips:["CH1에서 생성한 DOCX"],
-          note:"완료 기준 — PPTX가 실제로 열리고 편집 가능하며, 표·본문이 슬라이드 밖으로 넘치지 않아야 합니다.",
-          prompt:"첨부한 DOCX 보고서를 5장짜리 발표자료로 바꿔 주세요. 문장을 복사하지 말고 슬라이드마다 하나의 결론만 남기세요. 구성은 표지, 현재 문제와 목표, 대안 비교, 3단계 실행계획, 평가 지표와 결정 원칙입니다. 제목은 결론이 먼저 보이는 문장으로 쓰고, 본문은 3줄 이내로 줄이세요. 모든 수치는 보고서와 대조하고 편집 가능한 PPTX 파일로 제공하세요."
-        },
-        {
-          kind:"prompt", title:"PRACTICE · 문서·표·PPT 통합 프롬프트", tag:"시간 여유 시",
-          prompt:"이제 같은 교육용 자료를 근거로 결과물을 실제 파일로 만들어 주세요.\n\nA. 장문 초안: '대한정밀 신규 협력사 도입 제안서'를 문서 파일로 작성. 대상은 경영진, 1,200~1,500자, 배경-제안-운영-지표-리스크-결정요청 순서. 숫자 옆에 근거 위치를 붙이고 충돌 수치는 '확정 전'으로 표시.\nB. 표: 현재값/제안값/변화량/근거/발표 전 확인 상태 열을 가진 비교표를 포함.\nC. PPT: 5장. 한 장에 메시지 하나만 두고 각 장에 발표 의미 한 줄을 넣기. 1 문제, 2 해법, 3 4주 시범운영, 4 단가 절감률 충돌 확인(15% vs 12.1%), 5 의사결정 요청.\n\n먼저 산출물 계획을 6줄 이내로 보여준 뒤 실제 문서·표·PPT를 생성하고, 완료 후 파일별 확인 항목을 알려 주세요."
-        }
+      "badge": "함께하기",
+      "title": "만족한 결과를 최종 프롬프트로 바꿉니다",
+      "prompt": "지금까지 내가 요청한 조건과 수정사항을 모두 반영해서, 다음 회의에서도 사용할 수 있는 최종 프롬프트로 정리해줘. 회의 메모를 붙여 넣을 위치도 표시해줘.",
+      "followups": [],
+      "extras": [
+        { "label": "추가 실습 1", "text": "방금 만든 최종 프롬프트를 이번엔 '일일 업무보고'용으로 다시 만들어줘." },
+        { "label": "추가 실습 2", "text": "완성한 프롬프트에 회사 로고나 서식 관련 조건은 없는지 점검해줘." }
       ]
     },
     {
-      id: "s2c3", num:"CHAPTER 3", title:"10행 데이터를 프롬프트로 정리하기",
-      cards:[
-        {
-          kind:"prompt", title:"④ 처음 입력하는 프롬프트", tag:"수정 금지부터",
-          chips:["코비코_부품데이터_정리하기_따라하기.xlsx"],
-          note:"정답: A003(창고명 공백) · A004(수량 빈칸) · A005(단가 '1,200원')",
-          prompt:"첨부한 Excel의 '01_원본' 시트를 아직 수정하지 말고 확인해 주세요. 10행만 살펴보고 ① 창고명 앞뒤 공백 ② 수량 빈칸 ③ 단가에 포함된 쉼표와 '원' 문자만 찾아서 주문번호와 셀 위치를 표로 알려 주세요. 어려운 통계 용어는 쓰지 말고 초보자가 이해할 수 있게 설명해 주세요."
-        },
-        {
-          kind:"prompt", title:"⑤ 수식 작성 프롬프트", tag:"핵심",
-          chips:["같은 파일 이어서"],
-          prompt:"'01_원본' 시트는 수정하지 마세요. '02_정리하기' 시트의 F~J열에 사용할 수식을 한 개씩 설명해 주세요. F열(창고_정리)은 TRIM으로 앞뒤 공백을 제거하고, G열(수량_정리)은 빈칸이면 임의로 0을 넣지 말고 '확인필요'로 표시하고, H열(단가_정리)은 '1,200원'처럼 문자면 쉼표와 '원'을 제거해 숫자로 바꾸고, I열(처리상태)은 G열이 '확인필요'면 '확인필요', 아니면 '완료'로 표시하고, J열(매출액)은 처리상태가 '완료'일 때만 수량_정리×단가_정리로 계산하세요. 각 수식은 첫 적용 셀(2행)과 아래로 복사할 마지막 행(11행)을 함께 적어 주세요."
-        },
-        {
-          kind:"prompt", title:"⑥ 파일 작성 프롬프트", tag:"마무리",
-          note:"결과가 완료 9건·확인필요 1건·계산 차이 0이 맞는지 03_결과확인 시트에서 함께 확인하세요.",
-          prompt:"위 수식을 반영한 '02_정리하기' 시트와 '03_결과확인' 시트를 새 Excel 파일로 정리해 제공해 주세요. '01_원본' 시트는 절대 수정하지 마세요."
-        }
+      "badge": "함께하기",
+      "title": "프롬프트 코치에게 먼저 질문받습니다",
+      "prompt": "너는 업무용 프롬프트 코치야. 바로 프롬프트를 작성하지 말고, 결과에 큰 영향을 주는 질문을 한 번에 하나씩 최대 3개만 해줘. 각 질문에는 선택하기 쉬운 예시를 제시해줘. 내 답변이 끝나면 재사용할 수 있는 최종 프롬프트를 작성해줘.",
+      "followups": [],
+      "extras": [
+        { "label": "추가 실습 1", "text": "이번엔 '신입사원 교육자료 초안'을 만들고 싶다고 말하고, 코치의 질문에 답해서 프롬프트를 완성해줘." },
+        { "label": "추가 실습 2", "text": "완성된 프롬프트를 팀 동료도 그대로 쓸 수 있도록 설명 한 줄을 덧붙여줘." }
       ]
     },
     {
-      id: "s2c4", num:"부록 A", title:"상세 운영 보조 프롬프트",
-      cards:[
-        {
-          kind:"prompt", title:"근거 추출 프롬프트", tag:"선택",
-          chips:["가상_신규협력사_소개자료.pdf","가상_부품단가비교_데이터.csv"],
-          note:"CH1의 ①번보다 근거표를 더 꼼꼼히 먼저 만들고 싶을 때 대신 사용하세요.",
-          prompt:"아직 보고서를 쓰지 마세요. 업로드한 파일 목록과 각 파일의 역할을 먼저 표로 정리하세요. 이어서 보고서에 사용할 사실·수치·정의마다 파일명, 페이지/표/열, 기준일, 단위, 신뢰 상태를 표시하세요. 파일 사이에 서로 다른 내용이 있으면 임의로 해결하지 말고 차이 비교표와 담당자 확인 질문을 먼저 제시하세요."
-        },
-        {
-          kind:"prompt", title:"최종 검수 프롬프트", tag:"선택",
-          chips:["CH1~2 결과 DOCX / PPTX"],
-          prompt:"최종본을 새로 쓰지 말고 현재 초안을 검수하세요. 원자료와 대조해 숫자·날짜·단위·용어·근거 위치를 확인하고, 근거가 없는 문장을 목록화하세요. 표와 본문·슬라이드에 같은 지표가 다르게 표시되면 위치별 값을 비교하세요. 수정 제안은 사실 교정과 표현 개선을 분리하세요."
-        }
+      "badge": "직접하기",
+      "title": "직접 만든 요청을 5요소로 다시 점검합니다",
+      "prompt": "아래 구매 품목만 사용해 총무팀에 보낼 공식적인 승인 요청 메일을 작성해줘.\n\n[구매 품목]\n프린터 토너 10개(45,000원, 재고 소진) · A4 복사용지 50박스(18,000원, 정기 구매) · 노트북 거치대 5개(32,000원, 신규 입사자 지급) · 화이트보드 마카 20개(1,200원, 소모품 보충)",
+      "followups": [
+        "1. 독자와 승인 목적이 분명한가?",
+        "2. 자료의 범위와 금지사항이 있는가?",
+        "3. 원하는 출력 형식이 구체적인가?"
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "완성한 승인 요청 메일 프롬프트에 '독자'와 '형식' 조건을 명시적으로 추가해서 다시 작성해줘." },
+        { "label": "추가 실습 2", "text": "같은 프롬프트를 '구매 대신 폐기 승인' 요청으로 바꿔서 5요소가 잘 유지되는지 확인해줘." }
       ]
     }
   ]
 },
 {
-  id: "s3", label: "3회차 · 심화", short: "심화",
-  intro: "2~3회차에서 만든 v1 결과물(보고서·발표자료·데이터)을 프로젝트로 등록해 v2로 개선합니다.",
-  files: ["대한정밀_협력사도입검토_보고서_v1.docx","신규협력사_도입_검토_발표자료(5장결과물).pptx","코비코_부품데이터_정리하기_따라하기.xlsx"],
-  chapters: [
+  "num": "03",
+  "title": "이미지와 라이브러리",
+  "files": [],
+  "items": [
     {
-      id:"s3c1", num:"CHAPTER 1", title:"v1 → v2 개선 프로젝트 (오늘의 핵심 실습)",
-      cards:[
-        {
-          kind:"table", title:"등록할 v1 파일 3개", tag:"실습자료/심화실습",
-          columns:["v1 파일","역할","프로젝트가 확인할 것"],
-          rows:[
-            ["대한정밀_협력사도입검토_보고서_v1.docx","결론·근거 원문 (Word)","절감률·납기 수치"],
-            ["신규협력사_도입_검토_발표자료(5장결과물).pptx","발표용 요약 (PPT)","같은 수치가 보고서와 일치하는지"],
-            ["코비코_부품데이터_정리하기_따라하기.xlsx","근거 데이터 (Excel)","완료 9 · 확인필요 1 · 차이 0"],
-          ]
-        },
-        {
-          kind:"worksheet", title:"워크시트 · 나의 프로젝트 지침", tag:"직접 작성",
-          fields:[
-            ["역할","무슨 업무를 돕는 도우미인가"],
-            ["입력","프로젝트에 등록한 v1 파일 중 무엇만 사용할지"],
-            ["절차","기준값 확인 → 후보 제시 → 승인 → v2 생성 순서로"],
-            ["출력","결과물의 형태 — 변경 전·후·이유 표 + v2 파일"],
-            ["금지","원본 v1 덮어쓰기, 없는 수치 생성 등"],
-            ["검증","무엇과 숫자를 대조할지"],
-          ],
-          example:[
-            ["역할","중급 결과물 개선 도우미"],
-            ["입력","프로젝트의 v1 파일 3개만 사용"],
-            ["절차","기준값 확인 → 개선 후보 3개 제시 → 승인 → v2 생성"],
-            ["출력","변경 전·후·이유 표 + v2 파일"],
-            ["금지","원본 v1 덮어쓰기, 없는 수치 만들기"],
-            ["검증","v1·v2의 절감률·납기 수치가 같은지 대조"],
-          ]
-        },
-        {
-          kind:"prompt", title:"① 지침 검증 프롬프트", tag:"첫 채팅",
-          prompt:"아직 결과물을 만들지 마세요. 방금 등록한 프로젝트 지침을 내가 이해한 대로 요약해 보여 주세요. 역할·입력·절차·출력·금지·검증 여섯 줄이 모두 있는지 확인하고, 빠진 항목이 있으면 무엇인지 알려 주세요."
-        },
-        {
-          kind:"prompt", title:"② 기준값 확인 프롬프트", tag:"두 번째 채팅",
-          note:"보고서(v1)는 “약 15% 절감”, 발표자료(v1)는 “12.1% 절감” — 이 차이를 찾아내는 것이 목적입니다.",
-          prompt:"아직 파일을 수정하지 마세요. 첨부한 v1 파일(보고서 DOCX·발표자료 PPTX)의 파일명과 역할을 표로 정리하고, 두 파일에서 서로 같아야 하는 절감률·납기 수치를 기준값 표로 만드세요. 두 파일의 값이 다르면 어느 쪽이 맞는지 임의로 판단하지 말고 차이만 표로 보여주세요."
-        },
-        {
-          kind:"prompt", title:"③ 개선 실행 프롬프트 (v2 생성)", tag:"승인 후",
-          prompt:"방금 확인한 기준값 차이를 반영해 개선안을 적용하고 v2를 만드세요. 원본(v1)은 그대로 두고 새 파일로 저장하며, 무엇이 왜 바뀌었는지 변경 전·후·이유를 표로 먼저 보여준 뒤 v2 파일을 제공하세요."
-        },
-        {
-          kind:"prompt", title:"④ 최종 검증 프롬프트", tag:"마무리",
-          prompt:"v1과 v2의 절감률·납기 수치가 서로 같은지 다시 계산해 확인하고, 아직 남은 [확인 필요] 항목이 있으면 목록으로 알려 주세요."
-        }
+      "badge": "함께하기",
+      "title": "업무 이미지는 핵심 정보만 짧게 요청합니다",
+      "prompt": "'정기 품질점검' 사내 안내 이미지를 만들어줘. 일시는 수요일 오전 10시, 장소는 생산동 2층 품질회의실, 준비물은 최근 검사성적서야. 깔끔한 사무용 카드뉴스 스타일로 만들어줘.",
+      "followups": [],
+      "extras": [
+        { "label": "추가 실습 1", "text": "'화재 대피 훈련 안내' 사내 이미지를 만들어줘. 일시·장소·집합장소를 포함해서 카드뉴스 스타일로 만들어줘." },
+        { "label": "추가 실습 2", "text": "방금 만든 이미지에서 글자 크기를 더 키우고 회사 색상(남색 계열)으로 다시 만들어줘." }
+      ],
+      "refNote": "참고: 생성된 이미지"
+    }
+  ]
+},
+{
+  "num": "04",
+  "title": "웹 검색으로 최신 정보 찾기",
+  "files": [],
+  "items": [
+    {
+      "badge": "함께하기",
+      "title": "공식 원문을 우선하도록 검색 기준을 지정합니다",
+      "prompt": "2026년 기준 한국 최저임금의 시급과 월 환산액을 확인해줘. 고용노동부 또는 최저임금위원회 공식 원문을 우선하고, 발표일 · 적용기간 · 계산 기준을 표로 정리해줘.",
+      "followups": [
+        "1. 값마다 직접 링크를 표시해줘.",
+        "2. 공식 원문에서 확인되지 않는 값은 [확인 필요]로 표시해줘.",
+        "3. 마지막에 산술 계산을 다시 확인해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "2026년 기준 4대보험 요율을 국민연금공단 · 국세청 등 공식 자료로 확인해서 표로 정리해줘." },
+        { "label": "추가 실습 2", "text": "확인한 요율을 근거로 월급 300만원 기준 예상 공제액을 계산해줘." }
+      ],
+      "refNote": "참고: 검색 실행 결과 화면"
+    }
+  ]
+},
+{
+  "num": "05",
+  "title": "업무 문서 활용",
+  "files": ["실습자료_회의록_샘플.docx"],
+  "items": [
+    {
+      "badge": "함께하기",
+      "title": "기록된 회의 내용을 업무용 회의록으로 바꿉니다",
+      "prompt": "첨부한 회의 기록만 사용해 회의록 초안을 작성해줘. 회의 목적, 핵심 논의, 결정사항, 미결사항, 할 일 · 담당자 · 기한 표로 구성해줘.",
+      "followups": [
+        "1. 말이 반복된 부분은 합치되 결정과 의견은 구분해줘.",
+        "2. 담당자나 기한이 없는 항목은 [확인 필요]로 표시해줘.",
+        "3. 팀장이 1분 안에 읽을 수 있는 요약을 맨 앞에 넣어줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "첨부한 회의 기록에서 이번 주에 반드시 확인해야 할 위험 요인만 따로 뽑아줘." },
+        { "label": "추가 실습 2", "text": "같은 회의록을 신규 입사자도 배경을 알 수 있도록 한 문단 설명을 추가해서 다시 작성해줘." }
+      ],
+      "refNote": "참고: 회의록 실행 결과 화면 (실습파일: 실습자료_회의록_샘플.docx)"
+    },
+    {
+      "badge": "함께하기",
+      "title": "같은 회의록도 받는 사람에 따라 다시 작성합니다",
+      "prompt": "방금 만든 회의록을 참석자에게 보내는 공유 메일로 바꿔줘.",
+      "followups": [
+        "1. 결정사항과 각자 할 일을 먼저 보여줘.",
+        "2. 회신이 필요한 항목과 회신 기한을 분리해줘.",
+        "3. 팀장 보고용 5줄 요약도 별도로 작성해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "방금 만든 공유 메일을 이번엔 급한 안건만 먼저 보는 팀장에게 보내는 3줄 요약 메일로 바꿔줘." },
+        { "label": "추가 실습 2", "text": "같은 내용을 사내 메신저(채팅)로 공지할 짧은 버전으로 바꿔줘." }
       ]
     },
     {
-      id:"s3c2", num:"CHAPTER 2", title:"데이터 분석하기 (참고용)",
-      cards:[
-        {
-          kind:"prompt", title:"① 확인 질문 메타프롬프트", tag:"참고",
-          chips:["실습자료_월별매출비용데이터.csv"],
-          note:"기초에서 배운 메타프롬프트(역할→질문→제안→구조→검수→결과) 6단계를 데이터 분석에 그대로 적용합니다.",
-          prompt:"아직 분석 결과를 만들지 마세요. 첨부한 월별 매출·비용 데이터를 분석하는 데 필요한 확인 질문을 중요도 순서로 최대 6개 제시하세요. 어떤 지표를 강조할지, 어떤 기간을 비교할지, 어떤 차트 형태를 원하는지도 함께 물어보세요."
-        },
-        {
-          kind:"prompt", title:"② 통계 계산 프롬프트", tag:"참고",
-          note:"정답 참고 — 연간 매출 합계 1,183백만원 · 월평균 매출 약 98.6백만원 · 12월은 1월 대비 52% 증가.",
-          prompt:"확인 질문에 대한 제 답변은 [경영진 요약 / 월별 추이 / 매출·비용·이익 모두]입니다. 이 기준으로 연간 합계, 월평균, 전월 대비 증감률을 계산하고, 계산에 사용한 수식을 함께 보여 주세요. 반올림 기준도 표시하세요."
-        },
-        {
-          kind:"prompt", title:"③ 차트 자동 생성 프롬프트", tag:"참고",
-          prompt:"방금 계산한 월별 매출·비용·이익 데이터로 차트를 만들어 주세요. 12개월 추이는 선그래프로, 매출과 비용의 월별 비교는 막대그래프로 각각 만들고, 어떤 지표가 어떤 색인지 범례를 표시하세요."
-        }
+      "badge": "함께하기",
+      "title": "고객사 메일을 번역하고 업무용 문장으로 다듬습니다",
+      "prompt": "아래 한국어 메일을 해외 고객사에 보내는 영어 메일로 번역해줘. 제품명 · 수량 · 날짜 · 담당자 이름은 원문 그대로 유지해줘.\n\n[한국어 메일] 주문하신 제품(모델명 XG-200) 300개 중 일부 수량의 납기가 원자재 수급 문제로 약 5일 지연될 예정입니다. 9월 15일까지는 선적을 완료하겠습니다. 불편을 드려 죄송합니다. — 홍길동 드림",
+      "followups": [
+        "1. 직역투 표현은 자연스러운 비즈니스 영어로 바꿔줘.",
+        "2. 요청사항과 회신 기한이 눈에 띄게 정리되었는지 확인해줘.",
+        "3. 영문 아래에 의미 확인용 한국어 역번역도 붙여줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "아래 영어 회신 메일을 한국어로 번역하고 우리 쪽이 답해야 할 사항만 표로 정리해줘." },
+        { "label": "추가 실습 2", "text": "번역한 메일에서 어조가 너무 딱딱하지 않은지 검토하고 부드럽게 다듬은 버전도 함께 제시해줘." }
       ]
     },
     {
-      id:"s3c3", num:"CHAPTER 3", title:"시뮬레이션으로 의사결정하기 (참고용)",
-      cards:[
-        {
-          kind:"table", title:"계산식(고정) 및 정답 참고표", tag:"강사용",
-          columns:["구분","투입 예산","가정 매출 증가액","순효과","비고"],
-          rows:[
-            ["낮음","500만원","2,000만원 (확인 필요)","+1,500만원","기본 반응"],
-            ["기준","1,000만원","3,500만원 (확인 필요)","+2,500만원","증가폭 +1,000"],
-            ["높음","1,500만원","4,500만원 (확인 필요)","+3,000만원","증가폭 +500 (둔화)"],
-          ],
-          note:"계산식 — 순효과 = 가정 매출 증가액 − 투입 예산. 예산이 500만원 늘 때마다 증가폭이 1,000만원 → 500만원으로 줄어듭니다.",
-          prompt:"다음 분기 마케팅 예산의 실제 매출 증가 효과는 모릅니다. 예산 500만원·1,000만원·1,500만원을 각각 낮음·기준·높음으로 가정하고, 예상 매출 증가액과 순효과(매출 증가액 − 예산)를 표로 만드세요. 매출 증가액은 가정값이므로 '확인 필요'로 표시하고, 예산이 늘수록 순효과 증가폭이 어떻게 달라지는지도 설명하세요."
-        }
+      "badge": "직접하기",
+      "title": "받은 메일에서 답해야 할 질문을 먼저 찾습니다",
+      "prompt": "아래 고객사 메일에서 내가 답해야 할 질문과 요청사항을 표로 정리해줘. 아직 답할 정보가 없는 항목은 [확인 필요]로 표시해줘.\n\n[고객사 메일] 1) 사양 변경(내구성 기준)이 반영됐는지, 2) 정확한 납기일, 3) 결제 조건을 30일→45일로 조정 가능한지 확인 부탁드립니다.",
+      "followups": [
+        "1. 바로 답할 수 있는 내용만 사용해 회신 초안을 작성해줘.",
+        "2. 확인 필요 항목은 내부 담당자에게 물을 질문으로 바꿔줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "같은 고객사 메일에서 이번 주 안에 회신하지 않으면 문제가 될 항목만 우선순위로 정리해줘." },
+        { "label": "추가 실습 2", "text": "확인 필요 항목에 대해 내부 담당자에게 보낼 짧은 확인 메시지도 작성해줘." }
       ]
     },
     {
-      id:"s3c4", num:"CHAPTER 4", title:"최종 결과물 완성 (참고용)",
-      cards:[
-        {
-          kind:"worksheet", title:"워크시트 · 나의 메타프롬프트", tag:"직접 작성",
-          fields:[
-            ["역할","경영진 보고서 작성자 / 인사이트 리포트 디자이너 중 선택"],
-            ["시작 조건","바로 만들지 말고 확인 질문부터 받을 것"],
-            ["질문 규칙","확인 질문은 최대 몇 개, 무엇을 묻지 않을지"],
-            ["안전","없는 사실 생성 금지, 원자료 범위 고정"],
-            ["결과","CH2 인사이트 + CH3 시나리오를 포함한 최종 형태"],
-            ["완료","무엇과 숫자를 대조하고 확인 필요를 어떻게 남길지"],
-          ]
-        }
+      "badge": "함께하기",
+      "title": "자료를 읽고 보고서에 필요한 질문부터 받습니다",
+      "prompt": "첨부한 자료로 업무 검토 보고서를 만들려고 해. 바로 작성하지 말고, 보고서의 결론과 구성에 큰 영향을 주는 질문을 한 번에 하나씩 최대 4개만 해줘.",
+      "followups": [
+        "1. 내 답변이 끝나면 목차와 각 항목에 사용할 자료를 먼저 제안해줘.",
+        "2. 자료에 없는 수치나 사실은 [확인 필요]로 남겨줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "질문에 답하기 전에, 보고서에 반드시 들어가야 할 목차 초안을 먼저 제안해줘." },
+        { "label": "추가 실습 2", "text": "완성된 보고서 구성안을 바탕으로 각 항목별 예상 분량(페이지 수)도 제안해줘." }
+      ]
+    },
+    {
+      "badge": "강사 시연",
+      "title": "여러 자료의 내용을 비교표로 먼저 정리합니다",
+      "prompt": "첨부한 자료들을 비교해 현재값, 제안값, 차이, 근거 위치, 확인 상태 열을 가진 표를 만들어줘.",
+      "followups": [
+        "1. 자료끼리 숫자가 다르면 하나를 선택하지 말고 충돌 내용을 표시해줘.",
+        "2. 보고서 결론에 영향을 주는 차이 세 가지를 표 아래에 적어줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "비교표에서 차이가 가장 큰 항목 하나를 골라 원인이 될 수 있는 시나리오를 2~3개 제시해줘." },
+        { "label": "추가 실습 2", "text": "비교표를 경영진 보고용으로 요약한 한 문단 결론도 작성해줘." }
+      ],
+      "prepNote": "강사 준비 필요: 강사가 사전에 준비: 같은 내용을 다루는 서로 다른 자료 2종(예: 견적서 초안과 수정본, 또는 두 부서가 각각 작성한 실적 집계)을 함께 첨부해 비교표 실습을 시연합니다. 수치가 서로 다른 지점을 미리 확인해두면 시연이 매끄럽습니다."
+    },
+    {
+      "badge": "함께하기",
+      "title": "사진과 메모를 고객사 확인 요청 문서로 만듭니다",
+      "prompt": "첨부한 제품 사진과 검사 메모를 사용해 고객사 확인 요청 문서 초안을 작성해줘. 사진별로 관찰 내용, 예상 영향, 요청사항을 구분해줘.",
+      "followups": [
+        "1. 사진에서 확실히 보이지 않는 내용은 단정하지 말고 [확인 필요]로 표시해줘.",
+        "2. 문서 첫 부분에는 고객이 결정하거나 회신할 내용을 3줄로 요약해줘.",
+        "3. 사진 아래에 들어갈 짧은 캡션도 작성해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "사진과 메모를 바탕으로, 고객에게 전달하기 전에 우리 팀 내부에서 먼저 확인할 체크리스트를 만들어줘." },
+        { "label": "추가 실습 2", "text": "완성된 문서에서 사진 설명이 실제로 애매한 부분은 없는지 다시 검토해줘." }
+      ],
+      "refNote": "참고: 고객사 확인 요청 문서 초안 화면",
+      "prepNote": "강사 준비 필요: 실제 제품 사진과 현장 검사 메모가 필요합니다. 회사에서 보유한 최근 검사 사진(문제 없는 사진도 가능) 1~2장과 짧은 메모를 준비해 이 실습에 사용해주세요."
+    },
+    {
+      "badge": "강사 시연",
+      "title": "완성된 내용을 편집 가능한 Word 파일로 만듭니다",
+      "prompt": "지금까지 확정한 내용을 고객사 확인 요청서로 구성해줘. 제목, 요약, 사진과 캡션, 확인 내용 표, 요청사항, 회신 기한 순서로 작성해줘.",
+      "followups": [
+        "1. 사진이 들어갈 위치와 크기를 보기 좋게 배치해줘.",
+        "2. 회사에서 수정할 수 있는 DOCX 파일로 만들어줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "완성한 DOCX 문서에 표지 페이지(제목·날짜·작성자)를 추가해줘." },
+        { "label": "추가 실습 2", "text": "문서 안의 표 서식이 인쇄했을 때도 잘 보이도록 열 너비를 조정해줘." }
+      ],
+      "refNote": "참고: 완성된 DOCX 파일 화면"
+    },
+    {
+      "badge": "직접하기",
+      "title": "고객사 문서를 5장 설명자료로 바꿉니다",
+      "prompt": "완성한 고객사 확인 요청서를 5장 발표자료로 바꿔줘. 1 현상, 2 사진에서 확인한 내용, 3 영향, 4 조치안, 5 고객 확인 요청 순서로 구성해줘.",
+      "followups": [
+        "1. 사진은 관련 슬라이드에 배치하고 짧은 캡션을 넣어줘.",
+        "2. 단정할 수 없는 내용은 [확인 필요]로 유지해줘.",
+        "3. 편집 가능한 PPTX 파일로 만들어줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "완성한 5장 발표자료에 표지 슬라이드와 마지막 '다음 단계' 슬라이드를 추가해줘." },
+        { "label": "추가 실습 2", "text": "발표자료 전체를 한 문단으로 요약한 발표 스크립트도 작성해줘." }
+      ],
+      "refNote": "참고: 완성된 PPTX 파일 화면"
+    }
+  ]
+},
+{
+  "num": "06",
+  "title": "Excel 업무 해결",
+  "files": ["실습데이터_업무현황.xlsx"],
+  "items": [
+    {
+      "badge": "함께하기",
+      "title": "원하는 계산을 말하면 현재 표에 맞는 수식을 제안받습니다",
+      "prompt": "수량과 단가로 예상금액을 계산하고 싶어. 현재 표의 열 이름을 기준으로 사용할 수식을 작성하고, 첫 데이터 행에 입력하는 방법을 알려줘.",
+      "followups": [
+        "1. 수량이나 단가가 비어 있으면 '확인필요'로 표시해줘.",
+        "2. 일반 범위와 Excel 표에서 사용하는 수식을 각각 알려줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "실습데이터_업무현황.xlsx를 첨부했어. 접수일과 처리기한 사이 소요일수를 계산하는 수식도 알려줘." },
+        { "label": "추가 실습 2", "text": "단가가 10,000원 이상인 항목에만 '고액'이라고 표시하는 수식도 추가로 알려줘." },
+        { "label": "추가 실습 3", "text": "혼자 연습: 실습데이터_매출_생산품질.xlsx의 매출실적 시트를 첨부하고, 부서별 · 월별 매출 합계와 목표 대비 달성률을 SUMIF/SUMIFS로 구하는 수식을 요청해봐." }
+      ]
+    },
+    {
+      "badge": "함께하기",
+      "title": "두 표의 값을 연결하는 수식도 상황으로 요청합니다",
+      "prompt": "업무현황의 담당자 코드를 기준으로 담당자목록 시트에서 이름과 부서를 가져오고 싶어. 열 이름을 기준으로 사용할 수식을 알려줘.",
+      "followups": [
+        "1. XLOOKUP을 사용하는 방법을 먼저 알려줘.",
+        "2. XLOOKUP이 없는 Excel 버전의 대안도 알려줘.",
+        "3. 코드가 없으면 오류 대신 '담당자 확인'으로 표시해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "담당자코드가 담당자목록에 없는 경우와 비어 있는 경우를 다르게 표시하는 수식으로 다시 알려줘." },
+        { "label": "추가 실습 2", "text": "이름과 부서를 각각 다른 열에 나눠서 가져오는 수식도 알려줘." }
+      ]
+    },
+    {
+      "badge": "함께하기",
+      "title": "조건이 여러 개인 계산은 규칙을 나누어 설명합니다",
+      "prompt": "처리상태가 완료면 '완료', 완료가 아니면서 처리기한이 오늘보다 이전이면 '지연', 그 밖에는 '진행'으로 표시하는 수식을 만들어줘.",
+      "followups": [
+        "1. 조건을 판단하는 순서를 먼저 설명해줘.",
+        "2. Excel 표의 구조화 참조 수식으로 작성해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "업무구분이 '품질'이면서 상태가 '대기'인 건수만 세는 수식도 알려줘." },
+        { "label": "추가 실습 2", "text": "지연 건수를 담당자별로 집계하는 수식도 알려줘." }
+      ]
+    },
+    {
+      "badge": "강사 시연",
+      "title": "요약 결과는 새 시트에서 바로 확인합니다",
+      "prompt": "첨부한 업무현황 파일의 원본 시트는 수정하지 말고 'AI_요약결과'라는 새 시트를 만들어줘. 상단에는 전체 건수 · 완료율 · 지연 건수, 아래에는 업무구분별 요약표와 월별 접수 추이 차트를 배치해줘.",
+      "followups": [
+        "1. 계산 기준과 사용한 열 이름을 함께 적어줘.",
+        "2. 결과가 포함된 새 Excel 파일로 제공해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "AI_요약결과 시트에 담당자별 처리 건수 표도 추가해줘." },
+        { "label": "추가 실습 2", "text": "새 시트에 지연 건수가 많은 상위 3개 업무구분을 강조 표시해줘." }
+      ],
+      "refNote": "참고: AI_요약결과 시트 화면"
+    },
+    {
+      "badge": "함께하기",
+      "title": "원하는 서식을 말하면 기능과 설정 순서를 배울 수 있습니다",
+      "prompt": "처리기한이 지났고 상태가 완료가 아닌 행 전체를 연한 빨강으로 표시하고 싶어. 조건부 서식에서 사용할 수식과 메뉴 순서를 알려줘.",
+      "followups": [
+        "1. 데이터 행이 늘어나도 적용되게 범위 설정 방법을 알려줘.",
+        "2. 규칙을 수정하거나 삭제하는 위치도 알려줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "담당자코드가 비어 있는 행 전체를 노란색으로 표시하는 조건부 서식도 알려줘." },
+        { "label": "추가 실습 2", "text": "수량이나 단가가 비어 있는 셀만 별도 색으로 표시하는 방법도 알려줘." }
+      ]
+    },
+    {
+      "badge": "함께하기",
+      "title": "Excel 함수로 어려운 문장의 의미도 AI가 분류합니다",
+      "prompt": "요청내용 열을 읽고 구매, 생산, 품질, 납기 중 하나로 분류해줘. 긴급성이나 기한 표현이 있으면 우선순위도 상 · 중 · 하로 표시하고, 판단하기 어려우면 '확인필요'로 표시해줘.",
+      "followups": [
+        "1. 분류 결과를 새 열 두 개에 추가해줘.",
+        "2. 분류 기준을 별도 시트에 표로 정리해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "분류 결과에서 '확인필요'로 표시된 항목만 모아 별도 목록으로 정리해줘." },
+        { "label": "추가 실습 2", "text": "우선순위가 '상'으로 분류된 항목을 처리기한이 빠른 순서로 정렬해줘." }
+      ]
+    }
+  ]
+},
+{
+  "num": "07",
+  "title": "프로젝트와 재활용",
+  "files": [],
+  "items": [
+    {
+      "badge": "함께하기",
+      "title": "프로젝트 지침에는 반복할 규칙만 남깁니다",
+      "prompt": "업로드한 회의자료만 사용합니다. 먼저 핵심 내용을 3줄로 요약하고, 할 일 · 담당 · 기한을 표로 작성합니다. 없는 정보는 임의로 만들지 않습니다.",
+      "followups": [],
+      "extras": [
+        { "label": "추가 실습 1", "text": "같은 프로젝트 지침에 '표는 항상 담당자 · 기한 순으로 정렬한다'는 규칙을 추가해줘." },
+        { "label": "추가 실습 2", "text": "지침을 신규 팀원이 그대로 이해할 수 있게 예시 문장 하나를 덧붙여줘." }
+      ]
+    }
+  ]
+},
+{
+  "num": "08",
+  "title": "데이터 분석",
+  "files": ["실습데이터_매출_생산품질.xlsx"],
+  "items": [
+    {
+      "badge": "함께하기",
+      "title": "쉬운 말로 분석 목적과 결과를 요청합니다",
+      "prompt": "이 데이터에서 월별 생산량과 불량률 추이를 요약하고 그래프로 보여줘. 눈에 띄는 변화가 있으면 알려줘.",
+      "followups": [
+        "1. 불량률이 높은 달의 제품과 라인을 비교해줘.",
+        "2. 핵심 인사이트 3개와 추가로 확인할 질문을 정리해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "실습데이터_매출_생산품질.xlsx를 첨부했어. 생산라인별로 불량률 차이가 있는지 비교해줘." },
+        { "label": "추가 실습 2", "text": "이상치(평소보다 불량률이 크게 튄 날)가 있으면 날짜와 함께 짚어줘." }
+      ],
+      "refNote": "참고: 실습데이터_매출_생산품질.xlsx — 생산품질실적 시트 분석 화면"
+    },
+    {
+      "badge": "직접하기",
+      "title": "추가 질문으로 분석을 한 단계 더 깊게 만듭니다",
+      "prompt": "방금 분석에서 가장 중요한 변화 한 가지를 선택하고, 가능한 원인과 추가로 필요한 데이터를 구분해서 설명해줘.",
+      "followups": [
+        "1. 경영진에게 보고할 인사이트 3개로 줄여줘.",
+        "2. 다음 달에 확인할 지표와 질문을 제안해줘."
+      ],
+      "extras": [
+        { "label": "추가 실습 1", "text": "가장 중요한 변화의 원인을 확인하려면 현장에 어떤 데이터를 추가로 요청해야 하는지 정리해줘." },
+        { "label": "추가 실습 2", "text": "이번 분석 결과를 바탕으로 다음 회의에서 보고할 3줄 요약을 작성해줘." }
       ]
     }
   ]
@@ -863,79 +866,62 @@ function highlightFill(text){
   return esc(text).replace(/\[([^\]]+)\]/g, '<span class="fill">[$1]</span>');
 }
 
-function renderPromptBox(text, uid){
+let uidCounter = 0;
+
+function renderPromptBox(text){
+  uidCounter++;
+  const uid = uidCounter;
   return `<div class="promptbox">
     <pre id="p-${uid}">${highlightFill(text)}</pre>
     <button class="copy-btn" type="button" data-target="p-${uid}">복사</button>
   </div>`;
 }
 
-function fieldsToText(fields){
-  return fields.map(([k,v]) => `${k}: ${v}`).join("\n");
-}
-
-function renderInlineCopyHead(label, text){
-  return `<div class="worksheet-head">
-    <b>${esc(label)}</b>
-    <button class="copy-btn-inline" type="button" data-copytext="${esc(encodeURIComponent(text))}">복사</button>
-  </div>`;
-}
-
-let uidCounter = 0;
-
-function renderCard(card){
-  uidCounter++;
-  const kindLabel = {prompt:"프롬프트", worksheet:"워크시트", table:"참고표", checklist:"체크리스트", steps:"단계별"}[card.kind] || "";
+function renderItem(item){
+  const badgeClass = "kind-" + item.badge.replace(/\s+/g, "");
   let html = `<article class="card">
     <div class="card-top">
-      <h4 class="card-title">${esc(card.title)}</h4>
-      <span class="kind-badge kind-${card.kind}">${kindLabel}${card.tag ? " · " + esc(card.tag) : ""}</span>
+      <h4 class="card-title">${esc(item.title)}</h4>
+      <span class="kind-badge ${badgeClass}">${esc(item.badge)}</span>
     </div>`;
 
-  if (card.chips && card.chips.length){
-    html += `<div class="chips">${card.chips.map(c=>`<span class="chip">${esc(c)}</span>`).join("")}</div>`;
+  if (item.refNote){
+    html += `<div class="note-box ref">${esc(item.refNote)}</div>`;
   }
-  if (card.scenario){
-    html += `<div class="scenario">${highlightFill(card.scenario).replace(/\n/g,"<br>")}</div>`;
+  if (item.prepNote){
+    html += `<div class="note-box prep">${esc(item.prepNote)}</div>`;
   }
 
-  if (card.kind === "table"){
-    html += `<div style="overflow-x:auto"><table class="data"><thead><tr>${card.columns.map(c=>`<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>`;
-    card.rows.forEach(r => { html += `<tr>${r.map(v=>`<td>${esc(v)}</td>`).join("")}</tr>`; });
-    html += `</tbody></table></div>`;
-    if (card.note) html += `<div class="card-note">${esc(card.note)}</div>`;
-    if (card.prompt) html += renderPromptBox(card.prompt, uidCounter);
-  }
-  else if (card.kind === "worksheet"){
-    html += renderInlineCopyHead("빈칸 채우기용", fieldsToText(card.fields));
-    html += `<table class="data"><tbody>`;
-    card.fields.forEach(([k,v]) => { html += `<tr><td style="width:64px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--steel-deep)">${esc(k)}</td><td>${esc(v)}</td></tr>`; });
-    html += `</tbody></table>`;
-    if (card.example){
-      html += renderInlineCopyHead("작성 예시 · 지침으로 바로 등록", fieldsToText(card.example));
-      html += `<table class="data">`;
-      card.example.forEach(([k,v]) => { html += `<tr><td style="width:64px;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--steel-deep)">${esc(k)}</td><td>${esc(v)}</td></tr>`; });
-      html += `</table>`;
-    }
-  }
-  else if (card.kind === "checklist"){
-    html += `<ul class="checklist">${card.items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`;
-  }
-  else if (card.kind === "steps"){
-    html += `<div class="steps">`;
-    card.steps.forEach(s => {
-      uidCounter++;
-      html += `<div class="step">
-        <div class="step-num">${esc(s.label.replace(/[^0-9①②③④⑤]/g,'')) || '·'}</div>
-        <div class="step-body"><b>${esc(s.label)}</b><br>${s.isPrompt ? renderPromptBox(s.body, uidCounter) : esc(s.body)}</div>
+  html += `<div>
+    <p class="section-label">교안 프롬프트</p>
+    ${renderPromptBox(item.prompt)}
+  </div>`;
+
+  if (item.followups && item.followups.length){
+    html += `<div>
+      <p class="section-label">이어서 입력 · 순서대로</p>
+      <div class="followups">`;
+    item.followups.forEach((step, i) => {
+      const stepText = step.replace(/^\d+\.\s*/, "");
+      html += `<div class="fstep">
+        <div class="fstep-num">${i+1}</div>
+        <div>${renderPromptBox(stepText)}</div>
       </div>`;
     });
-    html += `</div>`;
-    if (card.note) html += `<div class="card-note">${esc(card.note)}</div>`;
+    html += `</div></div>`;
   }
-  else { // prompt
-    if (card.note) html += `<div class="card-note">${esc(card.note)}</div>`;
-    html += renderPromptBox(card.prompt, uidCounter);
+
+  if (item.extras && item.extras.length){
+    html += `<div>
+      <p class="section-label">추가 실습</p>
+      <div class="extra-grid">`;
+    item.extras.forEach(ex => {
+      html += `<div class="extra-item">
+        <span class="extra-tag">${esc(ex.label)}</span>
+        ${renderPromptBox(ex.text)}
+      </div>`;
+    });
+    html += `</div></div>`;
   }
 
   html += `</article>`;
@@ -943,62 +929,48 @@ function renderCard(card){
 }
 
 function buildAll(){
-  const tabbar = document.getElementById("tabbar");
-  const panels = document.getElementById("panels");
-  let totalChapters = 0, totalCards = 0;
+  const partnav = document.getElementById("partnav");
+  const partsEl = document.getElementById("parts");
+  let totalItems = 0, totalPrompts = 0;
 
-  DATA.forEach((session, i) => {
-    const btn = document.createElement("button");
-    btn.className = "tab-btn";
-    btn.type = "button";
-    btn.role = "tab";
-    btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
-    btn.dataset.target = session.id;
-    const cardCount = session.chapters.reduce((a,c)=>a+c.cards.length,0);
-    btn.innerHTML = `${esc(session.label)}<span class="count">${cardCount}</span>`;
-    btn.addEventListener("click", () => activate(session.id));
-    tabbar.appendChild(btn);
+  PARTS.forEach(part => {
+    const id = "part-" + part.num;
+    const a = document.createElement("a");
+    a.className = "jump-btn";
+    a.href = "#" + id;
+    a.dataset.target = id;
+    a.textContent = `${part.num} · ${part.title}`;
+    partnav.appendChild(a);
 
-    totalChapters += session.chapters.length;
-    totalCards += cardCount;
-
-    const panel = document.createElement("section");
-    panel.className = "panel" + (i === 0 ? " is-active" : "");
-    panel.id = "panel-" + session.id;
-    panel.setAttribute("role","tabpanel");
-
-    let html = `<div class="session-intro">
-      <h2>${esc(session.label)}</h2>
-      <p>${esc(session.intro)}</p>
-      ${session.files.length ? `<div class="files">${session.files.map(f=>`<span class="file-chip">${esc(f)}</span>`).join("")}</div>` : ""}
-    </div>`;
-
-    html += `<div class="chapter-jump">${session.chapters.map(c=>`<a href="#${c.id}">${esc(c.num)} · ${esc(c.title)}</a>`).join("")}</div>`;
-
-    session.chapters.forEach(chapter => {
-      html += `<div class="chapter" id="${chapter.id}">
-        <div class="chapter-head">
-          <span class="chapter-num">${esc(chapter.num)}</span>
-          <h3>${esc(chapter.title)}</h3>
-          <span class="chapter-tag">${chapter.cards.length}개</span>
-        </div>
-        <div class="card-grid">`;
-      chapter.cards.forEach(card => { html += renderCard(card); });
-      html += `</div></div>`;
+    totalItems += part.items.length;
+    part.items.forEach(it => {
+      totalPrompts += 1 + (it.followups ? it.followups.length : 0) + (it.extras ? it.extras.length : 0);
     });
 
-    panel.innerHTML = html;
-    panels.appendChild(panel);
+    const section = document.createElement("section");
+    section.className = "part";
+    section.id = id;
+
+    let html = `<div class="part-head">
+      <span class="part-num">PART ${part.num}</span>
+      <h2>${esc(part.title)}</h2>
+      <span class="part-count">${part.items.length}개 실습</span>
+    </div>`;
+
+    if (part.files.length){
+      html += `<div class="part-files">${part.files.map(f=>`<span class="file-chip">${esc(f)}</span>`).join("")}</div>`;
+    }
+
+    html += `<div class="card-grid">`;
+    part.items.forEach(item => { html += renderItem(item); });
+    html += `</div>`;
+
+    section.innerHTML = html;
+    partsEl.appendChild(section);
   });
 
-  document.getElementById("metaChapters").textContent = totalChapters;
-  document.getElementById("metaPrompts").textContent = totalCards;
-}
-
-function activate(id){
-  document.querySelectorAll(".tab-btn").forEach(b => b.setAttribute("aria-selected", b.dataset.target === id ? "true" : "false"));
-  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("is-active", p.id === "panel-" + id));
-  window.scrollTo({top: document.querySelector("nav.sessions").getBoundingClientRect().bottom + window.scrollY - 8, behavior:"instant"});
+  document.getElementById("metaItems").textContent = totalItems;
+  document.getElementById("metaPrompts").textContent = totalPrompts;
 }
 
 function legacyCopy(text){
@@ -1016,11 +988,9 @@ function legacyCopy(text){
 }
 
 document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".copy-btn, .copy-btn-inline");
+  const btn = e.target.closest(".copy-btn");
   if (!btn) return;
-  const text = btn.dataset.copytext !== undefined
-    ? decodeURIComponent(btn.dataset.copytext)
-    : document.getElementById(btn.dataset.target).innerText;
+  const text = document.getElementById(btn.dataset.target).innerText;
   const original = btn.textContent;
 
   function showResult(ok){
@@ -1037,4 +1007,17 @@ document.addEventListener("click", (e) => {
 });
 
 buildAll();
+
+/* scroll-spy for the PART nav */
+const jumpBtns = Array.from(document.querySelectorAll(".jump-btn"));
+const sections = jumpBtns.map(b => document.getElementById(b.dataset.target));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const btn = jumpBtns.find(b => b.dataset.target === entry.target.id);
+    if (!btn) return;
+    if (entry.isIntersecting) btn.classList.add("is-active");
+    else btn.classList.remove("is-active");
+  });
+}, { rootMargin: "-56px 0px -70% 0px", threshold: 0 });
+sections.forEach(s => s && io.observe(s));
 </script>
